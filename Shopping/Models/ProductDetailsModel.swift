@@ -8,7 +8,7 @@
 import Foundation
 
 class ProductDetailsModel: Identifiable, Decodable {
-    let id: Int
+    let id: String
     let CPU: String
     let camera: String
     let capacity: [String]

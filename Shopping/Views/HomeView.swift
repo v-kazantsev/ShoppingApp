@@ -33,12 +33,15 @@ struct HomeView: View {
                                 .frame(height: 8)
                             HomeStore(homeStoreData: $vm.homeStore)
                             if isFiltersShown {
-                                FiltersView(isFiltersShown: $isFiltersShown)
+                                FiltersView(isFiltersShown: $isFiltersShown, makerFilter: $vm.makerFilter)
                             }
                         }
                         if !isFiltersShown {
                             VStack(spacing: 0) {
                                 SectionTitle(title: "Best Seller", buttonText: "see more")
+                                    .onTapGesture {
+                                        vm.makerFilter = ""
+                                    }
                                 Spacer()
                                     .frame(height: 16)
                                 bestSellers
@@ -95,7 +98,7 @@ struct LocationView: View {
                     .tint(Color.theme.gray)
             Image("funnel")
                 .frame(width: 11, height: 13)
-                .padding(.leading, 76)
+                .padding(.leading, 66)
                 .padding(.trailing, 35)
                 .onTapGesture {
                     isFiltersShown = true
@@ -115,12 +118,8 @@ struct SectionTitle: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.leading, 17)
             Spacer()
-            Button {
-                print("view all clicked")
-            } label: {
-                RegularText(text: buttonText, size: 15)
-                    .foregroundColor(Color.theme.red)
-            }
+            RegularText(text: buttonText, size: 15)
+                .foregroundColor(Color.theme.red)
             .padding(.trailing, 33)
 
         }
@@ -209,7 +208,6 @@ struct HomeStore: View {
                             }
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.top, 23)
                         .padding(.leading, 22)
                     }
                     .frame(width: UIScreen.main.bounds.width, height: 182)
@@ -324,8 +322,10 @@ struct ExplorerView: View {
                     }
                     .padding(.trailing, -5)
                     Image(systemName: "bag")
+                        .background(CartMarker())
                         .font(.system(size: 18))
                         .foregroundColor(.white)
+                        
                     Image(systemName: "heart")
                         .font(.system(size: 18))
                         .foregroundColor(.white)
@@ -341,6 +341,7 @@ struct ExplorerView: View {
 struct FiltersView: View {
     
     @Binding var isFiltersShown: Bool
+    @Binding var makerFilter: String
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -363,6 +364,7 @@ struct FiltersView: View {
                     .foregroundColor(Color.theme.accent)
                     .padding(.trailing, 44)
                 Button {
+                    makerFilter = "Samsung"
                     isFiltersShown = false
                 } label: {
                     RoundedRectangle(cornerRadius: 10)
