@@ -10,7 +10,6 @@ import SwiftUI
 struct SearchBarView: View {
     
     @State var searchText = ""
-    @Binding var isFiltersShown: Bool
     
     var body: some View {
         HStack(spacing: 0) {
@@ -46,7 +45,9 @@ struct SearchBarView: View {
 
 struct SearchBarView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchBarView(isFiltersShown: .constant(true))
+        SearchBarView()
+            .padding()
+            .background(.black)
             .previewLayout(.sizeThatFits)
     }
 }

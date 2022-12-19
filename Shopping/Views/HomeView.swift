@@ -25,7 +25,7 @@ struct HomeView: View {
                                 .frame(height: 24)
                             Categories()
                         }
-                            SearchBarView(isFiltersShown: $isFiltersShown)
+                            SearchBarView()
                                 .padding(.bottom, 24)
                         VStack(spacing: 0) {
                             SectionTitle(title: "Hot sales", buttonText: "see more")
@@ -60,7 +60,7 @@ struct HomeView: View {
     
     private var bestSellers: some View {
         LazyVGrid(columns: [GridItem(.fixed(187)), GridItem(.fixed(187))]) {
-            ForEach(vm.bestSeller) { bestSeller in
+            ForEach(vm.filteredBestSeller) { bestSeller in
                 NavigationLink {
                     DetailsView()
                 } label: {

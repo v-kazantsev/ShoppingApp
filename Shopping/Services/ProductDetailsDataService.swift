@@ -22,9 +22,9 @@ class ProductDetailsDataService {
         productDetailsSubscription = NetworkingManager.fetch(from: url)
             .decode(type: ProductDetailsModel.self, decoder: JSONDecoder())
             .sink(receiveCompletion: NetworkingManager.handleCompletetion, receiveValue: { [unowned self] (responseData) in
-                                productDetails = responseData
-                                productDetailsSubscription?.cancel()
-                            })
+                productDetails = responseData
+                productDetailsSubscription?.cancel()
+            })
     }
 }
 

@@ -12,6 +12,7 @@ import Combine
 class HomeViewModel: ObservableObject {
     @Published var homeStore: [HomeStoreModel] = []
     @Published var bestSeller: [BestSellerModel] = []
+    @Published var filteredBestSeller: [BestSellerModel] = []
     @Published var makerFilter: String = ""
     
     private var dataService = HomeDataService()
@@ -43,7 +44,7 @@ class HomeViewModel: ObservableObject {
                     
             }
             .sink { [unowned self] (filteredProducts) in
-                    bestSeller = filteredProducts
+                    filteredBestSeller = filteredProducts
             }
             .store(in: &cancellables)
     }
