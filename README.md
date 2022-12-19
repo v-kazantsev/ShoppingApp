@@ -1,0 +1,4 @@
+# ShoppingApp
+
+- SwiftUI
+- MVVM + Combine
