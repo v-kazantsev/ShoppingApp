@@ -9,9 +9,16 @@ import SwiftUI
 
 @main
 struct ShoppingApp: App {
+    
+    @StateObject private var vm = CartViewModel()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationView {
+                HomeView()
+                    .navigationBarHidden(true)
+            }
+            .environmentObject(vm)
         }
     }
 }
